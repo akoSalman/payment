@@ -1,7 +1,7 @@
 {
   "name": "ako/gateway",
-  "homepage": "https://github.com/larabook/gateway",
-  "description": "A Laravel package for connecting to all Iraninan payment  gateways",
+  "homepage": "https://github.com/akoSalman/payment",
+  "description": "Connect to Iran payment gateways through PHP(laravel).",
   "keywords": [
     "laravel",
     "iran",
@@ -28,7 +28,8 @@
     "ipay",
     "asan-pardakht",
     "pay-ir",
-    "paypal"
+    "paypal",
+    "next-pay"
   ],
   "license": "MIT",
   "authors": [
