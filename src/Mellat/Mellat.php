@@ -15,9 +15,14 @@ class Mellat extends PortAbstract implements PortInterface
 	 * Address of main SOAP server
 	 *
 	 * @var string
+	 * @var string additionla_data
+	 *
 	 */
 	protected $serverUrl = 'https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl';
-
+	// protected $serverUrl = 'https://pgws.bpm.bankmellat.ir/pgwchannel/services/pgw?wsdl';
+	
+	protected $additionla_data;
+	
 	/**
 	 * {@inheritdoc}
 	 */
@@ -73,6 +78,28 @@ class Mellat extends PortAbstract implements PortInterface
 	}
 
 	/**
+	 * Set additionla data on request
+	 *
+	 * @param string $data 
+	 *
+	 * @return void
+	 */
+	function setAdditionalData ($data)
+	{
+		$this->additionla_data = $data;
+	}
+
+	/**
+	 * Get additionla data of request
+	 *
+	 * @return string 
+	 */
+	function getAdditionalData ()
+	{
+		return $this->additionla_data;
+	}
+
+	/**
 	 * Gets callback url
 	 * @return string
 	 */
@@ -105,7 +132,7 @@ class Mellat extends PortAbstract implements PortInterface
 			'amount' => $this->amount,
 			'localDate' => $dateTime->format('Ymd'),
 			'localTime' => $dateTime->format('His'),
-			'additionalData' => '',
+			'additionalData' => $this->getAdditionalData(),
 			'callBackUrl' => $this->getCallback(),
 			'payerId' => 0,
 		);
