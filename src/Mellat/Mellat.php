@@ -19,9 +19,8 @@ class Mellat extends PortAbstract implements PortInterface
 	 *
 	 */
 	protected $serverUrl = 'https://bpm.shaparak.ir/pgwchannel/services/pgw?wsdl';
-	// protected $serverUrl = 'https://pgws.bpm.bankmellat.ir/pgwchannel/services/pgw?wsdl';
-	
 	protected $additionla_data;
+	
 	
 	/**
 	 * {@inheritdoc}

@@ -13,8 +13,11 @@ class Parsian extends PortAbstract implements PortInterface
 	 * Url of parsian gateway web service
 	 *
 	 * @var string
+	 * @var string additionla_data
+	 *
 	 */
 	protected $serverUrl = 'https://pec.shaparak.ir/pecpaymentgateway/eshopservice.asmx?wsdl';
+	protected $additionla_data;
 
 	/**
 	 * Address of gate for redirect
@@ -84,6 +87,28 @@ class Parsian extends PortAbstract implements PortInterface
 			$this->callbackUrl = $this->config->get('gateway.parsian.callback-url');
 
 		return $this->makeCallback($this->callbackUrl, ['transaction_id' => $this->transactionId()]);
+	}
+
+	/**
+	 * Set additionla data on request
+	 *
+	 * @param string $data 
+	 *
+	 * @return void
+	 */
+	function setAdditionalData ($data)
+	{
+		$this->additionla_data = $data;
+	}
+
+	/**
+	 * Get additionla data of request
+	 *
+	 * @return string 
+	 */
+	function getAdditionalData ()
+	{
+		return $this->additionla_data;
 	}
 
 	/**
