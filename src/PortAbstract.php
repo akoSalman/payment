@@ -228,7 +228,7 @@ abstract class PortAbstract
 	function getTimeId()
 	{
 		$genuid = function(){
-			return substr(str_pad(str_replace('.','', microtime(true)),12,0),0,12);
+			return substr(str_pad(str_replace('.','', microtime(true)),9,0),0,9);
 		};
 		$uid=$genuid();
 		while ($this->getTable()->whereId($uid)->first())
