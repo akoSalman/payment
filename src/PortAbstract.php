@@ -228,7 +228,7 @@ abstract class PortAbstract
 	function getTimeId()
 	{
 		$genuid = function(){
-			if($this->portName == Enum::PARSIAN);
+			if($this->portName == Enum::PARSIAN)
 				return substr(str_pad(str_replace('.','', microtime(true)),12,0),5,12);
 			return substr(str_pad(str_replace('.','', microtime(true)),12,0),0,12);
 		};
