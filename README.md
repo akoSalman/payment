@@ -6,7 +6,7 @@ by this  package we are able to connect to all Iranian bank with one unique API.
 
 ( This Package is now compatible with both **4.\* and 5.\* versions of Laravel** )
 
-Please inform us once you've encountered [bug](https://github.com/larabook/gateway/issues) or [issue](https://github.com/larabook/gateway/issues)  .
+Please inform us once you've encountered [bug](https://github.com/akoSalman/payment/issues) or [issue](https://github.com/akoSalman/payment/issues)  .
 
 Available Banks:
  1. MELLAT
@@ -27,13 +27,13 @@ Run below statements on your terminal :
 
 STEP 1 : 
 
-    composer require larabook/gateway
+    composer require ako/gateway
     
 STEP 2 : Add `provider` and `facade` in config/app.php
 
     'providers' => [
       ...
-      Larabookir\Gateway\GatewayServiceProvider::class, // <-- add this line at the end of provider array
+      ako\Gateway\GatewayServiceProvider::class, // <-- add this line at the end of provider array
     ],
 
 
