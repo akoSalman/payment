@@ -1,6 +1,6 @@
 <?php
 
-namespace Larabookir\Gateway;
+namespace Ako\Gateway;
 
 interface PortInterface
 {

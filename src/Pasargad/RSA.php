@@ -1,5 +1,5 @@
 <?php
-namespace Larabookir\Gateway\Pasargad;
+namespace Ako\Gateway\Pasargad;
 define("BCCOMP_LARGER", 1);
 
 class RSA
