@@ -39,7 +39,7 @@ STEP 2 : Add `provider` and `facade` in config/app.php
 
     'aliases' => [
       ...
-      'Gateway' => Larabookir\Gateway\Gateway::class, // <-- add this line at the end of aliases array
+      'Gateway' => Ako\Gateway\Gateway::class, // <-- add this line at the end of aliases array
     ]
 
 Step 3:  
