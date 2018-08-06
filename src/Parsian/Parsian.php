@@ -1,11 +1,11 @@
 <?php
 
-namespace Ako\Gateway\Parsian;
+namespace Larabookir\Gateway\Parsian;
 
 use Illuminate\Support\Facades\Input;
 use SoapClient;
-use Ako\Gateway\PortAbstract;
-use Ako\Gateway\PortInterface;
+use Larabookir\Gateway\PortAbstract;
+use Larabookir\Gateway\PortInterface;
 
 class Parsian extends PortAbstract implements PortInterface
 {
@@ -53,7 +53,6 @@ class Parsian extends PortAbstract implements PortInterface
 	public function redirect()
 	{
 		$url = $this->gateUrl . $this->refId();
-
 		return \View::make('gateway::parsian-redirector')->with(compact('url'));
 	}
 
@@ -133,19 +132,18 @@ class Parsian extends PortAbstract implements PortInterface
 		);
 
 		try {
-			$soap = new SoapClient(['requestData' => $this->server_url]);
-			$response = $soap->SalePaymentRequest($params);
+			$soap = new SoapClient($this->server_url);
+			$response = $soap->SalePaymentRequest(['requestData' => $params]);
 
 		} catch (\SoapFault $e) {
 			$this->transactionFailed();
 			$this->newLog('SoapFault', $e->getMessage());
 			throw $e;
 		}
-
 		if ($response !== false) {
-			$authority = $response->Token ?? null;
-			$status = $response->Status ?? null;
-
+			$authority = $response->SalePaymentRequestResult->Token ?? null;
+			$status = $response->SalePaymentRequestResult->Status ?? null;
+			
 			if ($authority && $status == 0) {
 				$this->refId = $authority;
 				$this->transactionSetRefId();
@@ -194,24 +192,26 @@ class Parsian extends PortAbstract implements PortInterface
 
 		try {
 			$soap = new SoapClient($this->confirm_url);
-			$result = $soap->ConfirmPayment($params);
+			$result = $soap->ConfirmPayment(['requestData' => $params]);
 
 		} catch (\SoapFault $e) {
 			throw new ParsianErrorException($e->getMessage(), -1);
 		}
 
-		if ($result === false || !isset($result->Status))
+		if ($result === false || !isset($result->ConfirmPaymentResult->Status))
 			throw new ParsianErrorException('پاسخ دریافتی از بانک نامعتبر است.', -1);
-
-		if ($result->Status != 0) {
-			$errorMessage = ParsianResult::errorMessage($result->Status);
+		
+		$status = $result->ConfirmPaymentResult->Status;
+		
+		if ($status != 0) {
+			$errorMessage = ParsianResult::errorMessage($status);
 			$this->transactionFailed();
-			$this->newLog($result->Status, $errorMessage);
-			throw new ParsianErrorException($errorMessage, $result->Status);
+			$this->newLog($status, $errorMessage);
+			throw new ParsianErrorException($errorMessage, $status);
 		}
 
 		$this->trackingCode = $token;
 		$this->transactionSucceed();
-		$this->newLog($result->Status, ParsianResult::errorMessage($result->Status));
+		$this->newLog($status, ParsianResult::errorMessage($status));
 	}
 }
