@@ -133,7 +133,7 @@ class Parsian extends PortAbstract implements PortInterface
 		);
 
 		try {
-			$soap = new SoapClient($this->server_url);
+			$soap = new SoapClient(['requestData' => $this->server_url]);
 			$response = $soap->SalePaymentRequest($params);
 
 		} catch (\SoapFault $e) {
