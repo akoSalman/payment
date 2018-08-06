@@ -1,6 +1,6 @@
 {
-  "name": "ako/gateway",
-  "homepage": "https://github.com/akoSalman/payment",
+  "name": "ako/pay",
+  "homepage": "https://github.com/akoSalman/pay",
   "description": "Connect to Iran payment gateways through PHP(laravel).",
   "keywords": [
     "laravel",
