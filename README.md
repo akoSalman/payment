@@ -33,7 +33,7 @@ STEP 2 : Add `provider` and `facade` in config/app.php
 
     'providers' => [
       ...
-      ako\Gateway\GatewayServiceProvider::class, // <-- add this line at the end of provider array
+      Ako\Gateway\GatewayServiceProvider::class, // <-- add this line at the end of provider array
     ],
 
 
@@ -44,7 +44,7 @@ STEP 2 : Add `provider` and `facade` in config/app.php
 
 Step 3:  
 
-    php artisan vendor:publish --provider=Larabookir\Gateway\GatewayServiceProvider
+    php artisan vendor:publish --provider=Ako\Gateway\GatewayServiceProvider
 
 Step 4: 
 
@@ -103,7 +103,7 @@ and in your callback :
         // تراکنش با موفقیت سمت بانک تایید گردید
         // در این مرحله عملیات خرید کاربر را تکمیل میکنیم
     
-    } catch (\Larabookir\Gateway\Exceptions\RetryException $e) {
+    } catch (\Ako\Gateway\Exceptions\RetryException $e) {
     
         // تراکنش قبلا سمت بانک تاییده شده است و
         // کاربر احتمالا صفحه را مجددا رفرش کرده است
