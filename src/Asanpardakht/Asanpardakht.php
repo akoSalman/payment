@@ -9,12 +9,33 @@ use Ako\Gateway\PortInterface;
 
 class Asanpardakht extends PortAbstract implements PortInterface
 {
+    protected $additional_data;
+
     /**
      * Address of main SOAP server
      *
      * @var string
      */
     protected $serverUrl = 'https://services.asanpardakht.net/paygate/merchantservices.asmx?wsdl';
+
+    /**
+     * Set additionla data
+     * @param string $data
+     *
+     */
+    function setAdditionalData (String $data)
+    {
+        $this->additional_data = $data;
+    }
+
+    /**
+     * Get additionla data
+     * @return string 
+     */
+    function getAdditionalData ()
+    {
+        return $this->additional_data;
+    }
 
     /**
      * {@inheritdoc}
@@ -99,7 +120,7 @@ class Asanpardakht extends PortAbstract implements PortInterface
         $orderId = $this->transactionId();
         $price = $this->amount;
         $localDate = date("Ymd His");
-        $additionalData = "";
+        $additionalData = $this->getAdditionalData();
         $callBackUrl = $this->getCallback();
         $req = "1,{$username},{$password},{$orderId},{$price},{$localDate},{$additionalData},{$callBackUrl},0";
 
