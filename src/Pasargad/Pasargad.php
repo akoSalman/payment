@@ -126,6 +126,10 @@ class Pasargad extends PortAbstract implements PortInterface
 	protected function verifyPayment()
 	{
 		$processor = new RSAProcessor($this->config->get('gateway.pasargad.certificate-path'),RSAKeyType::XMLFile);
+
+		if (!Input::has('tref'))
+			throw new PasargadErrorException('درخواست غیر معتبر', -1);
+
 		$fields = array('invoiceUID' => Input::get('tref'));
 		$result = Parser::post2https($fields,'https://pep.shaparak.ir/CheckTransactionResult.aspx');
 		$check_array = Parser::makeXMLTree($result);
