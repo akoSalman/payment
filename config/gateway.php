@@ -9,6 +9,17 @@ return [
     'timezone' => 'Asia/Tehran',
 
     //--------------------------------
+    // Asan pardakht gateway
+    //--------------------------------    
+    'asanpardakht' => [
+        'key'               => 'xyz',
+        'iv'                => 'xyz',
+        'username'          => 'xyz',
+        'password'          => 'xyz',
+        'merchantConfigId'  => '1234'
+    ],
+
+    //--------------------------------
     // Zarinpal gateway
     //--------------------------------
     'zarinpal' => [
