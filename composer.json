@@ -64,10 +64,10 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Ako\\Pay\\GatewayServiceProvider"
+        "Ako\\Gateway\\GatewayServiceProvider"
       ],
       "aliases": {
-        "Gateway": "Ako\\Pay\\Pay"
+        "Gateway": "Ako\\Gateway\\Gateway"
       }
     }
   }
