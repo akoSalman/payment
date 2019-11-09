@@ -82,7 +82,7 @@ class JahanPay extends PortAbstract implements PortInterface
     function getCallback()
     {
         if (!$this->callbackUrl)
-            $this->callbackUrl = $this->config->get('gateway.jahanpay.callback-url');
+            $this->callbackUrl = $this->config['jahanpay']['callback-url'];
 
         return $this->makeCallback($this->callbackUrl, ['transaction_id' => $this->transactionId()]);
     }
@@ -101,7 +101,7 @@ class JahanPay extends PortAbstract implements PortInterface
         try {
             $soap = new SoapClient($this->serverUrl);
             $response = $soap->requestpayment(
-                $this->config->get('gateway.jahanpay.api'),
+                $this->config['jahanpay']['api'],
                 $this->amount,
                 $this->getCallback(),
                 $this->transactionId(),
@@ -157,7 +157,7 @@ class JahanPay extends PortAbstract implements PortInterface
         try {
             $soap = new SoapClient($this->serverUrl);
             $response = $soap->verification(
-                $this->config->get('gateway.jahanpay.api'),
+                $this->config['jahanpay']['api'],
                 $this->amount,
                 $this->refId
             );

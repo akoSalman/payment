@@ -88,7 +88,7 @@ class Payline extends PortAbstract implements PortInterface
 	function getCallback()
 	{
 		if (!$this->callbackUrl)
-			$this->callbackUrl = $this->config->get('gateway.payline.callback-url');
+			$this->callbackUrl = $this->config['payline']['callback-url'];
 
 		return urlencode($this->makeCallback($this->callbackUrl, ['transaction_id' => $this->transactionId()]));
 	}
@@ -105,7 +105,7 @@ class Payline extends PortAbstract implements PortInterface
 		$this->newTransaction();
 
 		$fields = array(
-			'api' => $this->config->get('gateway.payline.api'),
+			'api' => $this->config['payline']['api'],
 			'amount' => $this->amount,
 			'redirect' => $this->getCallback(),
 		);
@@ -164,7 +164,7 @@ class Payline extends PortAbstract implements PortInterface
 	protected function verifyPayment()
 	{
 		$fields = array(
-			'api' => $this->config->get('gateway.payline.api'),
+			'api' => $this->config['payline']['api'],
 			'id_get' => $this->refId(),
 			'trans_id' => $this->trackingCode()
 		);

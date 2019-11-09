@@ -27,7 +27,7 @@ abstract class PortAbstract
 	protected $cardNumber = '';
 
 	/**
-	 * @var Config
+	 * @var array $config
 	 */
 	protected $config;
 
@@ -73,13 +73,10 @@ abstract class PortAbstract
 	 */
 	protected $trackingCode;
 
-	/**
-	 * Initialize of class
-	 *
-	 * @param Config $config
-	 * @param DataBaseManager $db
-	 * @param int $port
-	 */
+    /**
+     * Initialize of class
+     *
+     */
 	function __construct()
 	{
 		$this->db = app('db');
@@ -90,6 +87,9 @@ abstract class PortAbstract
 
 	}
 
+	/**
+	* @param array $config
+	*/
 	function setConfig($config)
 	{
 		$this->config = $config;
@@ -108,7 +108,7 @@ abstract class PortAbstract
 	 */
 	function getLogTable()
 	{
-		return $this->db->table($this->config->get('gateway.table') . '_logs');
+		return $this->db->table($this->config['table') '][' '_logs'];
 	}
 
 	/**

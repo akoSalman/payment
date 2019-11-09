@@ -64,7 +64,7 @@ class Saman extends PortAbstract implements PortInterface
     {
         $main_data = [
             'amount'        => $this->amount,
-            'merchant'      => $this->config->get('gateway.saman.merchant'),
+            'merchant'      => $this->config['saman']['merchant'],
             'resNum'        => $this->transactionId(),
             'callBackUrl'   => $this->getCallback()
         ];
@@ -104,7 +104,7 @@ class Saman extends PortAbstract implements PortInterface
     function getCallback()
     {
         if (!$this->callbackUrl)
-            $this->callbackUrl = $this->config->get('gateway.saman.callback-url');
+            $this->callbackUrl = $this->config['saman']['callback-url'];
 
         $url = $this->makeCallback($this->callbackUrl, ['transaction_id' => $this->transactionId()]);
 
@@ -142,14 +142,14 @@ class Saman extends PortAbstract implements PortInterface
      * @return bool
      *
      * @throws SamanException
-     * @throws SoapFault
+     * @throws \SoapFault
      */
     protected function verifyPayment()
     {
         $fields = array(
-            "merchantID" => $this->config->get('gateway.saman.merchant'),
+            "merchantID" => $this->config['saman']['merchant'],
             "RefNum" => $this->refId,
-            "password" => $this->config->get('gateway.saman.password'),
+            "password" => $this->config['saman']['password'],
         );
 
 

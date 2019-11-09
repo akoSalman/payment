@@ -23,7 +23,7 @@ class GatewayResolver
 	protected $request;
 
 	/**
-	 * @var Config
+	 * @var array Config
 	 */
 	public $config;
 
@@ -36,16 +36,16 @@ class GatewayResolver
 
 	/**
 	 * Gateway constructor.
-	 * @param null $config
+	 * @param array $config
 	 * @param null $port
 	 */
-	public function __construct($config = null, $port = null)
+	public function __construct($config = [], $port = null)
 	{
-		$this->config = app('config');
+		$this->config = !$config ?: app('config')['gateway'];
 		$this->request = app('request');
 
-		if ($this->config->has('gateway.timezone'))
-			date_default_timezone_set($this->config->get('gateway.timezone'));
+		if ($tz = $this->getTimeZone())
+			date_default_timezone_set($tz);
 
 		if (!is_null($port)) $this->make($port);
 	}
@@ -167,5 +167,10 @@ class GatewayResolver
 		$this->port->boot();
 
 		return $this;
+	}
+
+	private function getTimeZone()
+	{
+		return $this->config['gateway']['timezone'] ?? null;
 	}
 }

@@ -111,7 +111,7 @@ class Zarinpal extends PortAbstract implements PortInterface
 	 */
 	public function redirect()
 	{
-		switch ($this->config->get('gateway.zarinpal.type')) {
+		switch ($this->config['zarinpal']['type']) {
 			case 'zarin-gate':
 				return \Redirect::to(str_replace('$Authority', $this->refId, $this->zarinGateUrl));
 				break;
@@ -153,7 +153,7 @@ class Zarinpal extends PortAbstract implements PortInterface
 	function getCallback()
 	{
 		if (!$this->callbackUrl)
-			$this->callbackUrl = $this->config->get('gateway.zarinpal.callback-url');
+			$this->callbackUrl = $this->config['zarinpal']['callback-url'];
 
 		return $this->makeCallback($this->callbackUrl, ['transaction_id' => $this->transactionId()]);
 	}
@@ -170,12 +170,12 @@ class Zarinpal extends PortAbstract implements PortInterface
 		$this->newTransaction();
 
 		$fields = array(
-			'MerchantID' => $this->config->get('gateway.zarinpal.merchant-id'),
+			'MerchantID' => $this->config['zarinpal']['merchant-id'],
 			'Amount' => $this->amount,
 			'CallbackURL' => $this->getCallback(),
-			'Description' => $this->description ? $this->description : $this->config->get('gateway.zarinpal.description', ''),
-			'Email' => $this->email ? $this->email :$this->config->get('gateway.zarinpal.email', ''),
-			'Mobile' => $this->mobileNumber ? $this->mobileNumber : $this->config->get('gateway.zarinpal.mobile', ''),
+			'Description' => $this->description ? $this->description : $this->config['zarinpal']['description', ''],
+			'Email' => $this->email ? $this->email :$this->config['zarinpal']['email', ''],
+			'Mobile' => $this->mobileNumber ? $this->mobileNumber : $this->config['zarinpal']['mobile', ''],
 		);
 
 		try {
@@ -230,7 +230,7 @@ class Zarinpal extends PortAbstract implements PortInterface
 	{
 
 		$fields = array(
-			'MerchantID' => $this->config->get('gateway.zarinpal.merchant-id'),
+			'MerchantID' => $this->config['zarinpal']['merchant-id'],
 			'Authority' => $this->refId,
 			'Amount' => $this->amount,
 		);
@@ -264,7 +264,7 @@ class Zarinpal extends PortAbstract implements PortInterface
 	 */
 	protected function setServer()
 	{
-		$server = $this->config->get('gateway.zarinpal.server', 'germany');
+		$server = $this->config['zarinpal']['server', 'germany'];
 		switch ($server) {
 			case 'iran':
 				$this->serverUrl = $this->iranServer;

@@ -62,7 +62,7 @@ class Paypal extends PortAbstract implements PortInterface
     function getCallback()
     {
         if (!$this->callbackUrl)
-            $this->callbackUrl = $this->config->get('gateway.paypal.settings.call_back_url');
+            $this->callbackUrl = $this->config['paypal.settings']['call_back_url'];
 
         return $this->makeCallback($this->callbackUrl, ['transaction_id' => $this->transactionId()]);
     }
@@ -236,7 +236,7 @@ class Paypal extends PortAbstract implements PortInterface
 
     public function getProductName(){
         if(!$this->productName){
-            return $this->config->get('gateway.paypal.default_product_name');
+            return $this->config['paypal']['default_product_name'];
         }
 
         return $this->productName;
@@ -244,7 +244,7 @@ class Paypal extends PortAbstract implements PortInterface
 
     public function getShipmentPrice(){
         if(!$this->shipmentPrice){
-            return $this->config->get('gateway.paypal.default_shipment_price');
+            return $this->config['paypal']['default_shipment_price'];
         }
 
         return $this->shipmentPrice;
