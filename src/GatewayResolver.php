@@ -38,6 +38,7 @@ class GatewayResolver
      * Gateway constructor.
      * @param array $config
      * @param null $port
+     * @throws PortNotFoundException
      */
     public function __construct($config = [], $port = null)
     {

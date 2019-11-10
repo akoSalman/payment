@@ -102,7 +102,7 @@ abstract class PortAbstract
      */
     function getTable()
     {
-        return $this->db->table($this->config->get('gateway.table'));
+        return $this->db->table($this->config['gateway']['table']);
     }
 
     /**
